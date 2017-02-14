@@ -7,4 +7,5 @@ if [ -f "${PRITUNL_CONFIG}" ]; then
   cat ${PRITUNL_CONFIG} | xargs -I '{}' pritunl set {}
 fi
 
+
 exec env GODEBUG=netdns=cgo pritunl start
