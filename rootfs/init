@@ -3,6 +3,7 @@
 [ "${MONGODB_URI}" ] && pritunl set-mongodb ${MONGODB_URI}
 
 if [ -f "${PRITUNL_CONFIG}" ]; then
+  cat ${PRITUNL_CONFIG}
   cat ${PRITUNL_CONFIG} | xargs -I '{}' pritunl set {}
 fi
 
