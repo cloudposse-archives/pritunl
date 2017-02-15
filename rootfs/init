@@ -8,4 +8,4 @@ if [ -f "${PRITUNL_CONFIG}" ]; then
 fi
 
 
-exec env GODEBUG=netdns=cgo pritunl start --conf ${PRITUNL_MAIN_CONFIG}
+exec env GODEBUG=netdns=cgo /usr/bin/pritunl start --conf ${PRITUNL_MAIN_CONFIG}
