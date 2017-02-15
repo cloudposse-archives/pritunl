@@ -10,7 +10,8 @@ ENV VERSION="1.26.1231.99"
 # Install:
 #------------------------------------------------------------------------------
 
-RUN apk --no-cache add --update -t deps go git bzr wget py-pip \
+RUN set -ex \
+    && apk --no-cache add --update -t deps go git bzr wget py-pip \
     gcc python-dev musl-dev linux-headers libffi-dev openssl-dev \
     && apk --no-cache add --update py-setuptools openssl procps ca-certificates openvpn \
     && export GOPATH=/go && go get github.com/pritunl/pritunl-dns \
