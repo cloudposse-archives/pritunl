@@ -1,4 +1,5 @@
 #!/bin/sh
+PRITUNL_MAIN_CONFIG=${PRITUNL_MAIN_CONFIG:-/etc/pritunl.conf}
 
 [ "${MONGODB_URI}" ] && pritunl set-mongodb ${MONGODB_URI}
 
@@ -7,4 +8,4 @@ if [ -f "${PRITUNL_CONFIG}" ]; then
 fi
 
 
-exec env GODEBUG=netdns=cgo pritunl start
+exec env GODEBUG=netdns=cgo pritunl start --conf ${PRITUNL_MAIN_CONFIG}
