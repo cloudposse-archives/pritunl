@@ -4,7 +4,7 @@ PRITUNL_MAIN_CONFIG=${PRITUNL_MAIN_CONFIG:-/etc/pritunl.conf}
 [ "${MONGODB_URI}" ] && pritunl set-mongodb ${MONGODB_URI}
 
 if [ -f "${PRITUNL_CONFIG}" ]; then
-  cat ${PRITUNL_CONFIG} | xargs -n 2 pritunl set
+  cat ${PRITUNL_CONFIG} | xargs -n 2 pritunl --conf ${PRITUNL_MAIN_CONFIG} set
 fi
 
 
