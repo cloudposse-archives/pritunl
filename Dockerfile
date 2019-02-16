@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -23,7 +23,7 @@ RUN set -ex \
       python \
       openvpn \
       bridge-utils \
-    && wget https://github.com/pritunl/pritunl/releases/download/${VERSION}/pritunl_${VERSION}-0ubuntu1.trusty_all.deb \
+    && wget https://github.com/pritunl/pritunl/releases/download/${VERSION}/pritunl_${VERSION}-0ubuntu1.xenial_amd64.deb \
     && dpkg -i pritunl_${VERSION}-0ubuntu1.trusty_all.deb
 
 
