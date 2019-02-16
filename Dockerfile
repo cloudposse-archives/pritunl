@@ -12,7 +12,7 @@ EXPOSE 1194
 
 ENTRYPOINT ["/init"]
 
-ENV VERSION="1.26.1231.99"
+ENV VERSION="1.29.1979.98"
 
 RUN set -ex \
     && apt-get update \
