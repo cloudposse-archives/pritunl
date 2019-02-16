@@ -14,6 +14,10 @@ ENTRYPOINT ["/init"]
 
 ENV VERSION="1.29.1979.98"
 
+RUN echo "deb http://repo.pritunl.com/stable/apt xenial main" >> /etc/apt/sources.list.d/pritunl.list
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv 9DA31620334BD75D9DCB49F368818C72E52529D4
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv 7568D9BB55FF9E5287D586017AE645C0CF8E292A
+
 RUN set -ex \
     && apt-get update \
     && apt-get install --yes \
@@ -23,8 +27,6 @@ RUN set -ex \
       python \
       openvpn \
       bridge-utils \
-    && wget https://github.com/pritunl/pritunl/releases/download/${VERSION}/pritunl_${VERSION}-0ubuntu1.xenial_amd64.deb \
-    && dpkg -i pritunl_${VERSION}-0ubuntu1.xenial_amd64.deb
-
+      pritunl
 
 ADD rootfs /
