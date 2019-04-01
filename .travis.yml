@@ -17,4 +17,4 @@ script:
 - make docker/build
 
 after_success:
-- make travis:docker-tag-and-push
+- make travis/docker-tag-and-push
