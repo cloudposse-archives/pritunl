@@ -12,7 +12,7 @@ EXPOSE 1194
 
 ENTRYPOINT ["/init"]
 
-ENV VERSION="1.29.2276.91"
+ENV VERSION="1.29.2435.70"
 
 RUN echo 'deb http://repo.pritunl.com/stable/apt xenial main' > /etc/apt/sources.list.d/pritunl.list \
     && echo "deb http://build.openvpn.net/debian/openvpn/stable xenial main" > /etc/apt/sources.list.d/openvpn-aptrepo.list \
