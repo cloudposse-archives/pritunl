@@ -26,7 +26,7 @@ RUN echo 'deb http://repo.pritunl.com/stable/apt xenial main' > /etc/apt/sources
     && ln -sf /usr/share/zoneinfo/UTC /etc/localtime \
     && apt-get upgrade -y -q \
     && apt-get dist-upgrade -y -q \
-    && apt-get -y install pritunl iptables python-dnspython \
+    && apt-get -y install pritunl iptables \
     && apt-get clean \
     && apt-get -y -q autoclean \
     && apt-get -y -q autoremove \
