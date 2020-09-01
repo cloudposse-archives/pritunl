@@ -30,6 +30,7 @@ RUN echo 'deb http://repo.pritunl.com/stable/apt xenial main' > /etc/apt/sources
     && apt-get clean \
     && apt-get -y -q autoclean \
     && apt-get -y -q autoremove \
+    && /usr/lib/pritunl/bin/python -m pip install 'mongo[srv]' dnspython \
     && rm -rf /tmp/*
 
 ADD rootfs /
