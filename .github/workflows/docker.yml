@@ -21,7 +21,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
       - name: "Build and push docker image to DockerHub"
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v1
         with:
           repository: ${{ github.repository }}
           registry: registry-1.docker.io
