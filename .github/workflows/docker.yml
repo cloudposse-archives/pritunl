@@ -14,6 +14,21 @@ jobs:
     steps:
       - name: "Checkout source code at current commit"
         uses: actions/checkout@v2
+      - name: Prepare
+        if: github.event.pull_request.head.repo.full_name == github.repository
+        id: Prep
+        run: |
+          TAGS=sha-${GITHUB_SHA:0:7}
+          if [[ $GITHUB_REF == refs/tags/* ]]; then
+            VERSION=${GITHUB_REF#refs/tags/}
+          else
+            VERSION=${GITHUB_REF#refs/heads/}-${GITHUB_SHA:0:7}
+          fi
+          TAGS="$TAGS,${{ github.repository }}:${VERSION}"
+          if [[ $VERSION =~ ^v[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
+            TAGS="$TAGS,${{ github.repository }}:latest"
+          fi
+          echo ::set-output name=tags::${TAGS}
       - name: Login to DockerHub
         if: github.event.pull_request.head.repo.full_name == github.repository
         uses: docker/login-action@v1
@@ -21,10 +36,9 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
       - name: "Build and push docker image to DockerHub"
-        uses: docker/build-push-action@v1
+        uses: docker/build-push-action@v2
         with:
           repository: ${{ github.repository }}
           registry: registry-1.docker.io
-          tag_with_ref: true
           push: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
-          tag_with_sha: true
+          tags: ${{ steps.prep.outputs.tags }}
