@@ -26,4 +26,5 @@ jobs:
           repository: ${{ github.repository }}
           registry: registry-1.docker.io
           tag_with_ref: true
+          push: {{ github.event.pull_request.head.repo.full_name == github.repository }}
           tag_with_sha: true
