@@ -42,5 +42,5 @@ jobs:
         with:
           repository: ${{ github.repository }}
           registry: registry-1.docker.io
-          push: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
+          push: github.event.pull_request.head.repo.full_name == github.repository
           tags: ${{ steps.prep.outputs.tags }}
