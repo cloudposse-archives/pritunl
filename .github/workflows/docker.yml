@@ -14,9 +14,9 @@ jobs:
     steps:
       - name: "Checkout source code at current commit"
         uses: actions/checkout@v2
-      - name: Prepare
+      - name: Prepare tags for Docker image
         if: github.event.pull_request.head.repo.full_name == github.repository
-        id: Prep
+        id: prepare
         run: |
           TAGS=${{ github.repository }}:sha-${GITHUB_SHA:0:7}
           if [[ $GITHUB_REF == refs/tags/* ]]; then
@@ -44,4 +44,4 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
-          tags: ${{ steps.prep.outputs.tags }}
+          tags: ${{ steps.prepare.outputs.tags }}
