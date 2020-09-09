@@ -18,11 +18,11 @@ jobs:
         if: github.event.pull_request.head.repo.full_name == github.repository
         id: Prep
         run: |
-          TAGS=sha-${GITHUB_SHA:0:7}
+          TAGS=${{ github.repository }}:sha-${GITHUB_SHA:0:7}
           if [[ $GITHUB_REF == refs/tags/* ]]; then
             VERSION=${GITHUB_REF#refs/tags/}
           elif [[ $GITHUB_REF == refs/pull/* ]]; then
-            VERSION=pr-${{ github.event.pull_request }}-merge
+            VERSION=pr-${{ github.event.pull_request.id }}-merge
           fi
           if [[ -n $VERSION ]]; then
             TAGS="$TAGS,${{ github.repository }}:${VERSION}"
@@ -42,5 +42,5 @@ jobs:
         with:
           repository: ${{ github.repository }}
           registry: registry-1.docker.io
-          push: github.event.pull_request.head.repo.full_name == github.repository
+          push: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
           tags: ${{ steps.prep.outputs.tags }}
